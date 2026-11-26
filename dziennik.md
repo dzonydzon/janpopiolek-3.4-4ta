@@ -39,3 +39,21 @@
 - **Sprawdzone: zapis notatek i operacje zapisu.** Wyszukano po `TimerApp` wyrażenia `WriteAllText`, `SaveFileDialog`, `try/catch` oraz połączono wynik z treścią projektu.
 - **Wynik:** Minutnik nie implementuje zapisu notatek ani zapisu historii, więc opisane trzy problemy dotyczące dialogu i zapisu pliku nie występują w tej wersji; stan cykli istnieje tylko w pamięci bieżącego uruchomienia.
 - **Nie wiadomo:** Nie ma danych zapisanych na dysku, dlatego nie można uczciwie potwierdzić persystencji historii — świadomie nie dodano jej do aplikacji.
+
+## 2026-11-26 — zadanie 4.1: specyfikacja minutnika
+
+- **Sprawdzone:** Porównałem specyfikację z kodem i interfejsem projektu `TimerApp`, a siedem pierwotnych zasad odczytałem z [lekcji o budowie minutnika](https://ttcmd.vercel.app/moduly/03-budujemy/budowa-1-prompt-token-okno). `dotnet build TimerApp/TimerApp.csproj --no-restore` zakończył się bez błędów i ostrzeżeń. Uruchomienie `dotnet run --project TimerApp/TimerApp.csproj --no-build` pozostawiło proces aplikacji aktywny; następnie go zatrzymałem.
+- **Wynik — porównanie z siedmioma zasadami:**
+
+  | Zasada | Wynik w repozytorium |
+  | --- | --- |
+  | Praca 25 minut, przerwa 5 minut, oba czasy zmieniane w oknie | Spełniona; to wartości początkowe, a pola przyjmują 1–180 minut. |
+  | Jeden przycisk Start/Pauza i drugi Reset | Niespełniona; interfejs ma osobne przyciski Start i Pauza oraz przycisk Resetuj. |
+  | Widoczny licznik ukończonych cykli | Spełniona. |
+  | Po skończonej pracy przerwa startuje sama | Spełniona według kodu `TimerTick`. |
+  | Czas w formacie `mm:ss` | Częściowo spełniona; minuty nie są uzupełniane zerem, więc pojawia się np. `9:59`, a nie `09:59`. |
+  | Polski interfejs i angielskie nazwy w kodzie | Spełniona. |
+  | Brak dodatkowych bibliotek | Spełniona; projekt używa zależności dostarczonych przez szablon Avalonia. |
+
+- **Nie wiadomo:** Nie przeprowadzono pełnego, minutowego testu odliczania. Porównanie przejść faz opiera się na kodzie `TimerTick`; zmiana ustawień podczas pracy, dokładny format czasu i powiadomienie po fazie pozostają do ustalenia.
+- **Niezaplanowane zachowanie:** Reset w trakcie przerwy wraca do pracy, ustawia aktualny czas pracy i zeruje licznik. Zmiana czasu bieżącej fazy podczas pauzy natychmiast ustawia jej pozostały czas na nową wartość; podczas odliczania zmiana nie przestawia bieżącego czasu, ale wpływa na następną taką fazę.
