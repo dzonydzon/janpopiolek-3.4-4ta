@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Class="TimerApp.MainWindow"
+        Title="Minutnik" Width="420" Height="520"
+        MinWidth="360" MinHeight="470">
+    <StackPanel Margin="24" Spacing="14">
+        <TextBlock Text="MINUTNIK" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Czas pracy (min)" Margin="0,0,0,4"/>
+                <NumericUpDown x:Name="WorkMinutes" Minimum="1" Maximum="180" Value="25"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Czas przerwy (min)" Margin="0,0,0,4"/>
+                <NumericUpDown x:Name="BreakMinutes" Minimum="1" Maximum="180" Value="5"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Padding="20" CornerRadius="12" Background="#F0F3F8">
+            <StackPanel HorizontalAlignment="Center" Spacing="8">
+                <TextBlock x:Name="PhaseText" Text="PRACA" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="TimeText" Text="25:00" FontSize="54" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="CycleText" Text="Ukończone cykle: 0" FontSize="15" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+            <Button x:Name="StartButton" Grid.Column="0" Content="Start" Click="StartButton_Click" HorizontalAlignment="Stretch"/>
+            <Button x:Name="PauseButton" Grid.Column="1" Content="Pauza" Click="PauseButton_Click" HorizontalAlignment="Stretch"/>
+            <Button x:Name="ResetButton" Grid.Column="2" Content="Resetuj" Click="ResetButton_Click" HorizontalAlignment="Stretch"/>
+        </Grid>
+    </StackPanel>
+</Window>

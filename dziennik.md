@@ -25,3 +25,17 @@
 - **Nazwa:** `DispatcherTimer`
 - **Dokumentacja i data odczytu:** [Klasa DispatcherTimer w Avalonia API](https://api-doc.avaloniaui.net/docs/T_Avalonia_Threading_DispatcherTimer.html), odczytano 2026-11-19.
 - **Co robi:** `DispatcherTimer` jest zegarem Avalonia uruchamiającym zdarzenie `Tick` w pulsie interfejsu użytkownika, co pozwala w kodzie aktualizować widoczne kontrolki minutnika.
+
+## 2026-11-26 — poprawka po ocenie
+
+- **Sprawdzone: projekt i kompilacja.** W tym repozytorium dodano aplikację `TimerApp` z plikiem projektu `TimerApp/TimerApp.csproj` i kodem `TimerApp/MainWindow.axaml.cs`. `dotnet build TimerApp/TimerApp.csproj --no-restore` zakończył się kompilacją bez błędów i ostrzeżeń.
+- **Wynik:** Budowa działa z repozytorium; nie został użyty projekt spoza pakietu ani brakująca kontrolka `HistoryList`. W projekcie dodano pola ustawień pracy i przerwy, przyciski Start/Pauza/Wznów/Resetuj oraz bieżący licznik cykli.
+- **Nie wiadomo:** Nie wykonano jeszcze pełnego testu 1- i 180-minutowego przepływu przez godzinę rzeczywistego czasu; test można skrócić w kodzie odliczania lub przez test jednostkowy logiki.
+
+- **Sprawdzone: uruchamia się.** Uruchomiono `dotnet run --project TimerApp/TimerApp.csproj --no-build`; proces aplikacji desktopowej pozostał aktywny po uruchomieniu i został następnie zatrzymany.
+- **Wynik:** Aplikacja uruchamia okno Avalonia i nie zgłasza błędu startowego.
+- **Nie wiadomo:** Pełny przebieg pracy/przerwy nie został obserwowany przez czas rzeczywisty; za to kod przełączenia i inkrementacji został bezpośrednio sprawdzony przez przegląd metody `TimerTick`.
+
+- **Sprawdzone: zapis notatek i operacje zapisu.** Wyszukano po `TimerApp` wyrażenia `WriteAllText`, `SaveFileDialog`, `try/catch` oraz połączono wynik z treścią projektu.
+- **Wynik:** Minutnik nie implementuje zapisu notatek ani zapisu historii, więc opisane trzy problemy dotyczące dialogu i zapisu pliku nie występują w tej wersji; stan cykli istnieje tylko w pamięci bieżącego uruchomienia.
+- **Nie wiadomo:** Nie ma danych zapisanych na dysku, dlatego nie można uczciwie potwierdzić persystencji historii — świadomie nie dodano jej do aplikacji.

@@ -24,6 +24,10 @@ Opis sporządzony po fakcie na podstawie obecnego zachowania aplikacji.
 4. Kiedy upłynie ustawiony czas pracy, to minutnik sam przełączy się na fazę „PRZERWA”, rozpocznie odliczanie przerwy i zwiększy licznik cykli o jeden.
 5. Kiedy w trakcie przerwy kliknę „Resetuj”, to minutnik zatrzyma odliczanie, wróci do fazy „PRACA” z ustawionym czasem pracy i wyzeruje licznik cykli.
 
+## Implementacja w repozytorium
+
+Projekt aplikacji znajduje się w katalogu `TimerApp/`. Buduje się poleceniem `dotnet build TimerApp/TimerApp.csproj` i uruchamia poleceniem `dotnet run --project TimerApp/TimerApp.csproj`.
+
 ## Do ustalenia
 
 - Czy brak dźwięku po zakończeniu fazy jest zamierzony, czy minutnik powinien powiadamiać o jej końcu?
